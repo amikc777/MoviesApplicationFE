@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+Movie Application with Spring Boot, MongoDB, Java, and React
+Welcome to the Movie Application repository! This project is designed to demonstrate the integration of Spring Boot, MongoDB, Java, and React to create a comprehensive movie application that allows users to browse, search, and discover information about movies.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+Browse a collection of movies with details such as title, release year, genre, and more.
+Search for movies based on different criteria like title, genre, release year, etc.
+View detailed information about each movie, including a brief overview and cast.
+User-friendly web interface built with React for seamless interaction.
+Backend powered by Spring Boot, providing RESTful APIs to manage movie data.
+Data storage and retrieval managed through MongoDB, ensuring flexibility and scalability.
+Technologies Used
+Frontend: React
+Backend: Spring Boot (Java)
+Database: MongoDB
+Prerequisites
+Before you begin, ensure you have the following installed:
 
-## Available Scripts
+Node.js and npm (for React)
+Java Development Kit (JDK)
+MongoDB
+Getting Started
+Clone the Repository:
 
-In the project directory, you can run:
+git clone https://github.com/your-username/movie-application.git
+cd movie-application
+Frontend Setup:
 
-### `npm start`
+cd frontend
+npm install
+npm start
+This will start the React development server and you can access the application at http://localhost:3000.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Backend Setup:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Open the project in your preferred Java IDE.
 
-### `npm test`
+Configure MongoDB connection settings in src/main/resources/application.properties.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Build and run the Spring Boot application.
 
-### `npm run build`
+Access the Application:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open your web browser and navigate to http://localhost:3000 to access the Movie Application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+API Endpoints
+The backend exposes the following RESTful API endpoints:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+GET /api/movies: Get a list of all movies.
+GET /api/movies/{id}: Get details of a specific movie by ID.
+GET /api/movies/search?query={searchQuery}: Search for movies based on the provided query.
+POST /api/movies: Add a new movie.
+PUT /api/movies/{id}: Update details of a movie.
+DELETE /api/movies/{id}: Delete a movie.
