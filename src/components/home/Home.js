@@ -1,9 +1,10 @@
 import Hero from '../hero/Hero';
 
-const Home = ({movies}) => {
+const Home = ({ movies }) => {
   return (
-    <Hero movies = {movies} />
+    // Render the Hero component with movies as a prop
+    <Hero movies={movies} />
   )
 }
 
-export default Home
+export default Home;
