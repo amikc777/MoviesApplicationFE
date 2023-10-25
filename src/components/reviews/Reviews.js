@@ -1,99 +1,92 @@
-import { useEffect, useRef, } from 'react';
+import { useEffect, useRef } from 'react';
 import api from '../../api/axiosConfig';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import ReviewForm from '../reviewForm/ReviewForm';
 import React from 'react';
 
+const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
+  const revText = useRef();
+  let params = useParams();
+  const movieId = params.movieId;
 
+  // Fetch movie data when the component mounts
+  useEffect(() => {
+    getMovieData(movieId);
+  }, [])
 
-const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
+  // Function to add a review for the movie
+  const addReview = async (e) => {
+    e.preventDefault();
 
-    const revText = useRef();
-    let params = useParams();
-    const movieId = params.movieId;
+    const rev = revText.current;
 
-    useEffect(()=> {
-        getMovieData(movieId);
-    }, [])
+    try {
+      const response = await api.post("/api/v1/reviews", { reviewBody: rev.value, imdbId: movieId });
 
+      const updatedReviews = [...reviews, { body: rev.value }];
 
-    const addReview = async (e) => {
-        e.preventDefault();
+      rev.value = "";
 
-        const rev = revText.current;
-
-        try {
-            const response = await api.post("/api/v1/reviews", {reviewBody:rev.value,imdbId:movieId});
-
-            const updatedReviews = [...reviews, {body:rev.value}];
-
-            rev.value = "";
-
-            setReviews(updatedReviews);
-        }
-        catch(err) 
-        {
-            console.error(err);
-        }
-
-
+      setReviews(updatedReviews);
     }
+    catch (err) {
+      console.error(err);
+    }
+  }
 
-     // Add console.log to check the values and see if reviews data is loaded.
-     console.log("movieId:", movieId);
-     console.log("movie:", movie);
-     console.log("reviews:", reviews);
+  // Log the values for debugging purposes
+  console.log("movieId:", movieId);
+  console.log("movie:", movie);
+  console.log("reviews:", reviews);
 
-    return (
-        <Container>
+  return (
+    <Container>
+      <Row>
+        <Col><h3>Reviews</h3></Col>
+      </Row>
+      <Row className='mt-2'>
+        <Col>
+          <img src={movie?.poster} alt="" />
+        </Col>
+        <Col>
+          <>
             <Row>
-                <Col><h3>Reviews</h3></Col>
-            </Row>
-            <Row className='mt-2'>
-                <Col>
-                    <img src={movie?.poster} alt="" />
-                </Col>
-                <Col>
-                    {
-                        <>
-                            <Row>
-                                <Col>
-                                    <ReviewForm handleSubmit={addReview} revText={revText} labelText="Write a Review?" />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <hr />
-                                </Col>
-                            </Row>
-                        </>
-                    }
-                    {
-                        reviews?.map((r) => {
-                            return (
-                                <>
-                                    <Row>
-                                        <Col>{r.body}</Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            <hr />
-                                        </Col>
-                                    </Row>
-                                </>
-                            )
-                        })
-                    }
-                </Col>
+              <Col>
+                <ReviewForm handleSubmit={addReview} revText={revText} labelText="Write a Review?" />
+              </Col>
             </Row>
             <Row>
-                <Col>
-                    <hr />
-                </Col>
+              <Col>
+                <hr />
+              </Col>
             </Row>
-        </Container>
-    )
+          </>
+          {
+            reviews?.map((r) => {
+              return (
+                <>
+                  <Row>
+                    <Col>{r.body}</Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <hr />
+                    </Col>
+                  </Row>
+                </>
+              )
+            })
+          }
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <hr />
+        </Col>
+      </Row>
+    </Container>
+  )
 }
 
-export default Reviews
+export default Reviews;
